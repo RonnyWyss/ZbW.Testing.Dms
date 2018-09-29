@@ -1,15 +1,15 @@
-﻿namespace ZbW.Testing.Dms.Client.ViewModels
+﻿using System;
+using System.Collections.Generic;
+using System.Windows;
+using Microsoft.Win32;
+using Prism.Commands;
+using Prism.Mvvm;
+using ZbW.Testing.Dms.Client.Model;
+using ZbW.Testing.Dms.Client.Repositories;
+using ZbW.Testing.Dms.Client.Services;
+
+namespace ZbW.Testing.Dms.Client.ViewModels
 {
-    using System;
-    using System.Collections.Generic;
-
-    using Microsoft.Win32;
-
-    using Prism.Commands;
-    using Prism.Mvvm;
-
-    using ZbW.Testing.Dms.Client.Repositories;
-
     internal class DocumentDetailViewModel : BindableBase
     {
         private readonly Action _navigateBack;
@@ -24,6 +24,8 @@
 
         private bool _isRemoveFileEnabled;
 
+        private IMetadataItem _metadataItem;
+        private readonly CreateFilePfad _createFilePfad;
         private string _selectedTypItem;
 
         private string _stichwoerter;
@@ -45,80 +47,50 @@
 
         public string Stichwoerter
         {
-            get
-            {
-                return _stichwoerter;
-            }
+            get => _stichwoerter;
 
-            set
-            {
-                SetProperty(ref _stichwoerter, value);
-            }
+            set => SetProperty(ref _stichwoerter, value);
         }
 
         public string Bezeichnung
         {
-            get
-            {
-                return _bezeichnung;
-            }
+            get => _bezeichnung;
 
-            set
-            {
-                SetProperty(ref _bezeichnung, value);
-            }
+            set => SetProperty(ref _bezeichnung, value);
         }
 
         public List<string> TypItems
         {
-            get
-            {
-                return _typItems;
-            }
+            get => _typItems;
 
-            set
-            {
-                SetProperty(ref _typItems, value);
-            }
+            set => SetProperty(ref _typItems, value);
         }
 
         public string SelectedTypItem
         {
-            get
-            {
-                return _selectedTypItem;
-            }
+            get => _selectedTypItem;
 
-            set
-            {
-                SetProperty(ref _selectedTypItem, value);
-            }
+            set => SetProperty(ref _selectedTypItem, value);
         }
 
         public DateTime Erfassungsdatum
         {
-            get
-            {
-                return _erfassungsdatum;
-            }
+            get => _erfassungsdatum;
 
-            set
-            {
-                SetProperty(ref _erfassungsdatum, value);
-            }
+            set => SetProperty(ref _erfassungsdatum, value);
+        }
+
+        public string FilePfadname
+        {
+            get =>_filePath;
+            set => SetProperty(ref _filePath, value);
         }
 
         public string Benutzer
         {
-            get
-            {
-                return _benutzer;
-            }
+            get => _benutzer;
 
-            set
-            {
-                SetProperty(ref _benutzer, value);
-            }
+            set => SetProperty(ref _benutzer, value);
         }
 
         public DelegateCommand CmdDurchsuchen { get; }
@@ -127,46 +99,81 @@
 
         public DateTime? ValutaDatum
         {
-            get
-            {
-                return _valutaDatum;
-            }
+            get => _valutaDatum;
 
-            set
-            {
-                SetProperty(ref _valutaDatum, value);
-            }
+            set => SetProperty(ref _valutaDatum, value);
         }
 
         public bool IsRemoveFileEnabled
         {
-            get
-            {
-                return _isRemoveFileEnabled;
-            }
+            get => _isRemoveFileEnabled;
 
-            set
-            {
-                SetProperty(ref _isRemoveFileEnabled, value);
-            }
+            set => SetProperty(ref _isRemoveFileEnabled, value);
         }
 
         private void OnCmdDurchsuchen()
         {
             var openFileDialog = new OpenFileDialog();
             var result = openFileDialog.ShowDialog();
-
-            if (result.GetValueOrDefault())
-            {
-                _filePath = openFileDialog.FileName;
-            }
+            
+            if (result.GetValueOrDefault()) _filePath = openFileDialog.FileName;
         }
 
         private void OnCmdSpeichern()
         {
-            // TODO: Add your Code here
+            if (CheckReqiredFields() && _filePath != null)
+            {
+                _metadataItem = new MetadataItem(this);
+              //_createFilePfad.Add
+                _navigateBack();
+            }
+            else
+            {
+                if (!CheckRequiredFieldsBezeichnung())
+                {
+                    MessageBox.Show("Sie habe noch keine Bezeichnung eingegeben");
+                }
 
-            _navigateBack();
+                if (!CheckRequiredFieldsValutaDatum())
+                {
+                    MessageBox.Show("Sie haben noch kein Valuta Datum eingegeben");
+                }
+
+                if (!CheckRequiredFieldsSelectTypeItem())
+                {
+                    MessageBox.Show("Sie haben ein das Dokument noch nicht zu einem Typ hinzugefügt");
+                }
+
+            }
         }
+
+        private bool CheckReqiredFields()
+        {
+            return CheckRequiredFieldsBezeichnung() && CheckRequiredFieldsValutaDatum() &&
+                   CheckRequiredFieldsSelectTypeItem();
+        }
+
+        private bool CheckRequiredFieldsBezeichnung()
+        {
+            var bezeichnng = !string.IsNullOrEmpty(Bezeichnung);
+            return bezeichnng;
+        }
+
+        private bool CheckRequiredFieldsValutaDatum()
+        {
+            var valutaDatum = !string.IsNullOrEmpty(ValutaDatum.ToString());
+            return valutaDatum;
+        }
+
+        private bool CheckRequiredFieldsSelectTypeItem()
+        {
+            var selectedTypeItem = !string.IsNullOrEmpty(SelectedTypItem);
+            return selectedTypeItem;
+        }
+
+    }
+
+    internal class FileSystemService
+    {
     }
 }

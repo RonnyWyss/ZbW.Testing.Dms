@@ -8,7 +8,8 @@
             new List<string>
                 {
                     "Verträge",
-                    "Quittungen"
+                    "Quittungen",
+                    "Rechnungen"
                 };
     }
 }

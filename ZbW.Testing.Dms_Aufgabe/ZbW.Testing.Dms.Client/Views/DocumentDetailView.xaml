@@ -75,5 +75,9 @@
                 Content="Speichern"
                 Command="{Binding CmdSpeichern}"/>
 
+        <TextBox Grid.Row="0" Grid.Column="2"
+                 IsEnabled="False"
+                 Text="{Binding FilePfadname}"/>
+
     </Grid>
 </UserControl>
