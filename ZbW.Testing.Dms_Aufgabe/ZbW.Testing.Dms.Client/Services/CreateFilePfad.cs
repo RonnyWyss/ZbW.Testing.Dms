@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
 namespace ZbW.Testing.Dms.Client.Services
 {
-    class CreateFilePfad
+  public class CreateFilePfad
     {
         private const string TargetPath = @"C:\Temp\DMS1";
-        private string pathString = System.IO.Path.Combine(TargetPath, "2018");
-
-        
-
+        private string pathString = Path.Combine(TargetPath, "2018");
     }
 }

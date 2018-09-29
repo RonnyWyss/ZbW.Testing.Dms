@@ -1,12 +1,10 @@
-﻿namespace ZbW.Testing.Dms.Client.ViewModels
+﻿using System.Windows.Controls;
+using Prism.Commands;
+using Prism.Mvvm;
+using ZbW.Testing.Dms.Client.Views;
+
+namespace ZbW.Testing.Dms.Client.ViewModels
 {
-    using System.Windows.Controls;
-
-    using Prism.Commands;
-    using Prism.Mvvm;
-
-    using ZbW.Testing.Dms.Client.Views;
-
     internal class MainViewModel : BindableBase
     {
         private string _benutzer;
@@ -22,28 +20,16 @@
 
         public string Benutzer
         {
-            get
-            {
-                return _benutzer;
-            }
+            get => _benutzer;
 
-            set
-            {
-                SetProperty(ref _benutzer, value);
-            }
+            set => SetProperty(ref _benutzer, value);
         }
 
         public UserControl Content
         {
-            get
-            {
-                return _content;
-            }
+            get => _content;
 
-            set
-            {
-                SetProperty(ref _content, value);
-            }
+            set => SetProperty(ref _content, value);
         }
 
         public DelegateCommand CmdNavigateToSearch { get; }

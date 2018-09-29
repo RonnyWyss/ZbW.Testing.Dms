@@ -1,15 +1,15 @@
-﻿namespace ZbW.Testing.Dms.Client.Repositories
-{
-    using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+namespace ZbW.Testing.Dms.Client.Repositories
+{
     internal class ComboBoxItems
     {
         public static List<string> Typ =>
             new List<string>
-                {
-                    "Verträge",
-                    "Quittungen",
-                    "Rechnungen"
-                };
+            {
+                "Verträge",
+                "Quittungen",
+                "Rechnungen"
+            };
     }
 }

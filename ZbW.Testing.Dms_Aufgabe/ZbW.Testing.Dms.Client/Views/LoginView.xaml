@@ -12,30 +12,30 @@
         d:DataContext="{d:DesignInstance viewModels:LoginViewModel}">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="1" Grid.Column="1" Text="Benutzername"/>
-        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Benutzername, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="Benutzername" />
+        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Benutzername, UpdateSourceTrigger=PropertyChanged}" />
 
         <Grid Grid.Row="3" Grid.Column="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Row="0" Grid.Column="0" Content="Login" Command="{Binding CmdLogin}"/>
-            <Button Grid.Row="0" Grid.Column="1" Content="Abbrechen" Command="{Binding CmdAbbrechen}"/>
+            <Button Grid.Row="0" Grid.Column="0" Content="Login" Command="{Binding CmdLogin}" />
+            <Button Grid.Row="0" Grid.Column="1" Content="Abbrechen" Command="{Binding CmdAbbrechen}" />
         </Grid>
     </Grid>
 </Window>

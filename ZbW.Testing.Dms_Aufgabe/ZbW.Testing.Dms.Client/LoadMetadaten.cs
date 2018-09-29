@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ZbW.Testing.Dms.Client
+﻿namespace ZbW.Testing.Dms.Client
 {
-    class LoadMetadaten
+    internal class LoadMetadaten
     {
         /*
         private void LoadMetadata(List<KeyValuePair<string, List<MetadataItem>>> yearItems)

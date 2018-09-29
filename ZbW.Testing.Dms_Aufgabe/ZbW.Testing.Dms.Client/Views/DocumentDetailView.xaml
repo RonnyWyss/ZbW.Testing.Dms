@@ -9,75 +9,75 @@
              d:DataContext="{d:DesignInstance viewModels:DocumentDetailViewModel}">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0" Grid.Column="0"
-                   Text="Dokument"/>
+                   Text="Dokument" />
         <Button Grid.Row="0" Grid.Column="1"
                 Content="Durchsuchen"
-                Command="{Binding CmdDurchsuchen}"/>
+                Command="{Binding CmdDurchsuchen}" />
 
         <TextBlock Grid.Row="1" Grid.Column="0"
-                   Text="Bezeichnung"/>
+                   Text="Bezeichnung" />
         <TextBox Grid.Row="1" Grid.Column="1"
-                 Text="{Binding Bezeichnung}"/>
+                 Text="{Binding Bezeichnung}" />
 
         <TextBlock Grid.Row="2" Grid.Column="0"
-                   Text="Valuta Datum"/>
+                   Text="Valuta Datum" />
         <DatePicker Grid.Row="2" Grid.Column="1"
-                    SelectedDate="{Binding ValutaDatum}"/>
+                    SelectedDate="{Binding ValutaDatum}" />
 
         <TextBlock Grid.Row="3" Grid.Column="0"
-                   Text="Typ"/>
+                   Text="Typ" />
         <ComboBox Grid.Row="3" Grid.Column="1"
                   ItemsSource="{Binding TypItems}"
-                  SelectedItem="{Binding SelectedTypItem}"/>
+                  SelectedItem="{Binding SelectedTypItem}" />
 
         <TextBlock Grid.Row="4" Grid.Column="0"
-                   Text="Stichwörter"/>
+                   Text="Stichwörter" />
         <TextBox Grid.Row="4" Grid.Column="1"
-                 Text="{Binding Stichwoerter}"/>
+                 Text="{Binding Stichwoerter}" />
 
         <TextBlock Grid.Row="5" Grid.Column="0"
-                   Text="Erfassungsdatum"/>
+                   Text="Erfassungsdatum" />
         <TextBox Grid.Row="5" Grid.Column="1"
                  IsEnabled="False"
-                 Text="{Binding Erfassungsdatum, StringFormat=dd.MM.yyyy HH:mm:ss}"/>
+                 Text="{Binding Erfassungsdatum, StringFormat=dd.MM.yyyy HH:mm:ss}" />
 
         <TextBlock Grid.Row="6" Grid.Column="0"
-                   Text="Benutzer"/>
+                   Text="Benutzer" />
         <TextBox Grid.Row="6" Grid.Column="1"
                  IsEnabled="False"
-                 Text="{Binding Benutzer}"/>
+                 Text="{Binding Benutzer}" />
 
         <TextBlock Grid.Row="7" Grid.Column="0"
                    Text="Datei anschliessend löschen"
-                   TextWrapping="Wrap"/>
+                   TextWrapping="Wrap" />
         <CheckBox Grid.Row="7" Grid.Column="1"
-                  IsChecked="{Binding IsRemoveFileEnabled}"/>
+                  IsChecked="{Binding IsRemoveFileEnabled}" />
 
         <Button Grid.Row="8" Grid.Column="1"
                 Content="Speichern"
-                Command="{Binding CmdSpeichern}"/>
+                Command="{Binding CmdSpeichern}" />
 
         <TextBox Grid.Row="0" Grid.Column="2"
                  IsEnabled="False"
-                 Text="{Binding FilePfadname}"/>
+                 Text="{Binding FilePfadname}" />
 
     </Grid>
 </UserControl>

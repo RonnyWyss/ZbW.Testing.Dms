@@ -12,6 +12,7 @@ namespace ZbW.Testing.Dms.Client.ViewModels
 {
     internal class DocumentDetailViewModel : BindableBase
     {
+        private readonly CreateFilePfad _createFilePfad;
         private readonly Action _navigateBack;
 
         private string _benutzer;
@@ -25,7 +26,6 @@ namespace ZbW.Testing.Dms.Client.ViewModels
         private bool _isRemoveFileEnabled;
 
         private IMetadataItem _metadataItem;
-        private readonly CreateFilePfad _createFilePfad;
         private string _selectedTypItem;
 
         private string _stichwoerter;
@@ -82,7 +82,7 @@ namespace ZbW.Testing.Dms.Client.ViewModels
 
         public string FilePfadname
         {
-            get =>_filePath;
+            get => _filePath;
             set => SetProperty(ref _filePath, value);
         }
 
@@ -115,7 +115,7 @@ namespace ZbW.Testing.Dms.Client.ViewModels
         {
             var openFileDialog = new OpenFileDialog();
             var result = openFileDialog.ShowDialog();
-            
+
             if (result.GetValueOrDefault()) _filePath = openFileDialog.FileName;
         }
 
@@ -124,26 +124,16 @@ namespace ZbW.Testing.Dms.Client.ViewModels
             if (CheckReqiredFields() && _filePath != null)
             {
                 _metadataItem = new MetadataItem(this);
-              //_createFilePfad.Add
+                //_createFilePfad.Add
                 _navigateBack();
             }
             else
             {
-                if (!CheckRequiredFieldsBezeichnung())
-                {
-                    MessageBox.Show("Sie habe noch keine Bezeichnung eingegeben");
-                }
+                if (!CheckRequiredFieldsBezeichnung()) MessageBox.Show("Sie habe noch keine Bezeichnung eingegeben");
 
-                if (!CheckRequiredFieldsValutaDatum())
-                {
-                    MessageBox.Show("Sie haben noch kein Valuta Datum eingegeben");
-                }
+                if (!CheckRequiredFieldsValutaDatum()) MessageBox.Show("Sie haben noch kein Valuta Datum eingegeben");
 
-                if (!CheckRequiredFieldsSelectTypeItem())
-                {
-                    MessageBox.Show("Sie haben ein das Dokument noch nicht zu einem Typ hinzugefügt");
-                }
-
+                if (!CheckRequiredFieldsSelectTypeItem()) MessageBox.Show("Sie haben ein das Dokument noch nicht zu einem Typ hinzugefügt");
             }
         }
 
@@ -170,7 +160,6 @@ namespace ZbW.Testing.Dms.Client.ViewModels
             var selectedTypeItem = !string.IsNullOrEmpty(SelectedTypItem);
             return selectedTypeItem;
         }
-
     }
 
     internal class FileSystemService

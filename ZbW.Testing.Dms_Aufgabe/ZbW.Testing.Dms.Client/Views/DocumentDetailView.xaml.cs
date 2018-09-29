@@ -1,12 +1,11 @@
-﻿namespace ZbW.Testing.Dms.Client.Views
+﻿using System;
+using System.Windows.Controls;
+using ZbW.Testing.Dms.Client.ViewModels;
+
+namespace ZbW.Testing.Dms.Client.Views
 {
-    using System;
-    using System.Windows.Controls;
-
-    using ZbW.Testing.Dms.Client.ViewModels;
-
     /// <summary>
-    /// Interaction logic for NewDocumentView.xaml
+    ///     Interaction logic for NewDocumentView.xaml
     /// </summary>
     public partial class DocumentDetailView : UserControl
     {

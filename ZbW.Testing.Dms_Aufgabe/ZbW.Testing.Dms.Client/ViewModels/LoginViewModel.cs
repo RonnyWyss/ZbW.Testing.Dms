@@ -1,12 +1,10 @@
-﻿namespace ZbW.Testing.Dms.Client.ViewModels
+﻿using System.Windows;
+using Prism.Commands;
+using Prism.Mvvm;
+using ZbW.Testing.Dms.Client.Views;
+
+namespace ZbW.Testing.Dms.Client.ViewModels
 {
-    using System.Windows;
-
-    using Prism.Commands;
-    using Prism.Mvvm;
-
-    using ZbW.Testing.Dms.Client.Views;
-
     internal class LoginViewModel : BindableBase
     {
         private readonly LoginView _loginView;
@@ -26,17 +24,11 @@
 
         public string Benutzername
         {
-            get
-            {
-                return _benutzername;
-            }
+            get => _benutzername;
 
             set
             {
-                if (SetProperty(ref _benutzername, value))
-                {
-                    CmdLogin.RaiseCanExecuteChanged();
-                }
+                if (SetProperty(ref _benutzername, value)) CmdLogin.RaiseCanExecuteChanged();
             }
         }
 
