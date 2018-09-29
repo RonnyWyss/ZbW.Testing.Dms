@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZbW.Testing.Dms.Client.UnitTests
+namespace ZbW.Testing.Dms.Client.Services
 {
-    public class Class1
+    interface IAppSettingService
     {
+        string GetRepositoryDir();
     }
 }

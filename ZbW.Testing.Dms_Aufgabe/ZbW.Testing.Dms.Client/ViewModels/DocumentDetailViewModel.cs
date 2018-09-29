@@ -7,32 +7,29 @@ using Prism.Mvvm;
 using ZbW.Testing.Dms.Client.Model;
 using ZbW.Testing.Dms.Client.Repositories;
 using ZbW.Testing.Dms.Client.Services;
+using ZbW.Testing.Dms.Client.Services.Interface;
 
 namespace ZbW.Testing.Dms.Client.ViewModels
 {
-    internal class DocumentDetailViewModel : BindableBase
+    public class DocumentDetailViewModel : BindableBase
     {
-        private readonly CreateFilePfad _createFilePfad;
+        private readonly FileSystemService _fileSystemService;
         private readonly Action _navigateBack;
 
         private string _benutzer;
-
         private string _bezeichnung;
-
         private DateTime _erfassungsdatum;
-
         private string _filePath;
+        private readonly IFileRepository _fileRepository;
 
         private bool _isRemoveFileEnabled;
-
         private IMetadataItem _metadataItem;
         private string _selectedTypItem;
-
         private string _stichwoerter;
-
         private List<string> _typItems;
 
         private DateTime? _valutaDatum;
+
 
         public DocumentDetailViewModel(string benutzer, Action navigateBack)
         {
@@ -43,6 +40,8 @@ namespace ZbW.Testing.Dms.Client.ViewModels
 
             CmdDurchsuchen = new DelegateCommand(OnCmdDurchsuchen);
             CmdSpeichern = new DelegateCommand(OnCmdSpeichern);
+            //  _fileSystemService = new FileSystemService();
+            _fileRepository = new FileRepository();
         }
 
         public string Stichwoerter
@@ -117,6 +116,8 @@ namespace ZbW.Testing.Dms.Client.ViewModels
             var result = openFileDialog.ShowDialog();
 
             if (result.GetValueOrDefault()) _filePath = openFileDialog.FileName;
+
+            FilePfadname = _filePath;
         }
 
         private void OnCmdSpeichern()
@@ -124,7 +125,7 @@ namespace ZbW.Testing.Dms.Client.ViewModels
             if (CheckReqiredFields() && _filePath != null)
             {
                 _metadataItem = new MetadataItem(this);
-                //_createFilePfad.Add
+                _fileRepository.AddFile(_metadataItem, IsRemoveFileEnabled);
                 _navigateBack();
             }
             else
@@ -160,9 +161,5 @@ namespace ZbW.Testing.Dms.Client.ViewModels
             var selectedTypeItem = !string.IsNullOrEmpty(SelectedTypItem);
             return selectedTypeItem;
         }
-    }
-
-    internal class FileSystemService
-    {
     }
 }

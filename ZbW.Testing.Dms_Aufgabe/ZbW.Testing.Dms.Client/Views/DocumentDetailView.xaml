@@ -77,7 +77,7 @@
 
         <TextBox Grid.Row="0" Grid.Column="2"
                  IsEnabled="False"
-                 Text="{Binding FilePfadname}" />
+                 Text="{Binding FilePfadname, Mode=TwoWay}" />
 
     </Grid>
 </UserControl>

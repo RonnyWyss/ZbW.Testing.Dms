@@ -71,6 +71,12 @@
   <ItemGroup>
     <Folder Include="_TestResources\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ZbW.Testing.Dms.Client\ZbW.Testing.Dms.Client.csproj">
+      <Project>{bad666d8-64bf-467f-b2e9-6c1dc66d2beb}</Project>
+      <Name>ZbW.Testing.Dms.Client</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
