@@ -13,7 +13,5 @@ namespace ZbW.Testing.Dms.Client.Views
             InitializeComponent();
             DataContext = new SearchViewModel();
         }
-
-     
     }
 }

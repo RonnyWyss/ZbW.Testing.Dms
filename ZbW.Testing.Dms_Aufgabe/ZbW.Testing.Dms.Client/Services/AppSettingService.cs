@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Configuration;
 
 namespace ZbW.Testing.Dms.Client.Services
 {
-    class AppSettingService:IAppSettingService
+    internal class AppSettingService : IAppSettingService
     {
         public string GetRepositoryDir()
         {

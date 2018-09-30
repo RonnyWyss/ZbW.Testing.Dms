@@ -13,14 +13,13 @@ namespace ZbW.Testing.Dms.Client.ViewModels
 {
     public class DocumentDetailViewModel : BindableBase
     {
-        private readonly FileSystemService _fileSystemService;
+        private readonly IAddFileRepository _addFileRepository;
         private readonly Action _navigateBack;
 
         private string _benutzer;
         private string _bezeichnung;
         private DateTime _erfassungsdatum;
         private string _filePath;
-        private readonly IFileRepository _fileRepository;
 
         private bool _isRemoveFileEnabled;
         private IMetadataItem _metadataItem;
@@ -40,8 +39,7 @@ namespace ZbW.Testing.Dms.Client.ViewModels
 
             CmdDurchsuchen = new DelegateCommand(OnCmdDurchsuchen);
             CmdSpeichern = new DelegateCommand(OnCmdSpeichern);
-            //  _fileSystemService = new FileSystemService();
-            _fileRepository = new FileRepository();
+            _addFileRepository = new AddFileRepository();
         }
 
         public string Stichwoerter
@@ -125,7 +123,7 @@ namespace ZbW.Testing.Dms.Client.ViewModels
             if (CheckReqiredFields() && _filePath != null)
             {
                 _metadataItem = new MetadataItem(this);
-                _fileRepository.AddFile(_metadataItem, IsRemoveFileEnabled);
+                _addFileRepository.AddFile(_metadataItem, IsRemoveFileEnabled);
                 _navigateBack();
             }
             else

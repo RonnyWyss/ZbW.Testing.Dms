@@ -11,9 +11,9 @@ namespace ZbW.Testing.Dms.Client.ViewModels
 {
     internal class SearchViewModel : BindableBase
     {
-        private FileRepository _fileRepository;
-        private ObservableCollection<MetadataItem> _filteredMetadataItems;
-        private MetadataItem _selectedMetadataItem;
+        private readonly LoadFileRepository _loadFileRepository;
+        private ObservableCollection<IMetadataItem> _filteredMetadataItems;
+        private IMetadataItem _selectedMetadataItem;
 
         private string _selectedTypItem;
         private string _suchbegriff;
@@ -27,8 +27,8 @@ namespace ZbW.Testing.Dms.Client.ViewModels
             CmdSuchen = new DelegateCommand(OnCmdSuchen);
             CmdReset = new DelegateCommand(OnCmdReset);
             CmdOeffnen = new DelegateCommand(OnCmdOeffnen, OnCanCmdOeffnen);
-            _fileRepository = new FileRepository();
-     //       _filteredMetadataItems = new ObservableCollection<IMetadataItem>();
+            _loadFileRepository = new LoadFileRepository();
+            _filteredMetadataItems = new ObservableCollection<IMetadataItem>();
             //ShowData();
         }
 
@@ -59,7 +59,7 @@ namespace ZbW.Testing.Dms.Client.ViewModels
             set => SetProperty(ref _selectedTypItem, value);
         }
 
-        public ObservableCollection<MetadataItem> FilteredMetadataItems
+        public ObservableCollection<IMetadataItem> FilteredMetadataItems
         {
             get => _filteredMetadataItems;
 
@@ -76,16 +76,16 @@ namespace ZbW.Testing.Dms.Client.ViewModels
              }
          }*/
 
-        public MetadataItem SelectedMetadataItem
-         {
-             get => _selectedMetadataItem;
+        public IMetadataItem SelectedMetadataItem
+        {
+            get => _selectedMetadataItem;
 
-             set
-             {
-                 if (SetProperty(ref _selectedMetadataItem, value)) CmdOeffnen.RaiseCanExecuteChanged();
-             }
-         }
-         
+            set
+            {
+                if (SetProperty(ref _selectedMetadataItem, value)) CmdOeffnen.RaiseCanExecuteChanged();
+            }
+        }
+
         private bool OnCanCmdOeffnen()
         {
             return SelectedMetadataItem != null;
@@ -93,7 +93,6 @@ namespace ZbW.Testing.Dms.Client.ViewModels
 
         private void OnCmdOeffnen()
         {
-            // TODO: Add your Code here
             var process = new Process();
             process.EnableRaisingEvents = false;
             process.StartInfo.FileName = SelectedMetadataItem.PathInRepo;
@@ -103,12 +102,14 @@ namespace ZbW.Testing.Dms.Client.ViewModels
         private void OnCmdSuchen()
         {
             // TODO: Add your Code here
-           // _fileRepository.LoadMetadata();
+            //  _loadFileRepository.LoadMetadaten(List<KeyValuePair<string _suchbegriff,List<IMetadataItem _filteredMetadataItems>>>_typItems);
         }
 
         private void OnCmdReset()
         {
-            // TODO: Add your Code here
+            FilteredMetadataItems.Clear();
+            Suchbegriff = null;
+            SelectedTypItem = null;
         }
     }
 }

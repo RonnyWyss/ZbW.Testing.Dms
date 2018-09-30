@@ -11,20 +11,6 @@ namespace ZbW.Testing.Dms.Client.UnitTests.ViewModels
         private const string TEST_STICHWORT = "TestStichwort";
 
         [Test]
-        public void StichwortItem_StichwortItemIsNotNull_AddStichwortItem()
-        {
-            //arrange
-            var documentDetailViewModel = new DocumentDetailViewModel(TEST_BENUTZER, delegate { });
-
-            //act
-            documentDetailViewModel.Stichwoerter = TEST_STICHWORT;
-         
-            //assert
-            Assert.That(documentDetailViewModel.Stichwoerter.Count, Is.GreaterThan(0));
-
-        }
-
-        [Test]
         public void CmdAddStichwortItem_StichwortItemIsNotNull_AddStichwortItem()
         {
             //arrange
@@ -35,7 +21,19 @@ namespace ZbW.Testing.Dms.Client.UnitTests.ViewModels
 
             //assert
             Assert.That(documentDetailViewModel.Stichwoerter.Count, Is.GreaterThan(0));
+        }
 
+        [Test]
+        public void StichwortItem_StichwortItemIsNotNull_AddStichwortItem()
+        {
+            //arrange
+            var documentDetailViewModel = new DocumentDetailViewModel(TEST_BENUTZER, delegate { });
+
+            //act
+            documentDetailViewModel.Stichwoerter = TEST_STICHWORT;
+
+            //assert
+            Assert.That(documentDetailViewModel.Stichwoerter.Count, Is.GreaterThan(0));
         }
     }
 }

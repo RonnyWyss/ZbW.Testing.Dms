@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
@@ -9,50 +8,20 @@ using ZbW.Testing.Dms.Client.Services.Interface;
 
 namespace ZbW.Testing.Dms.Client.Services
 {
-    internal class FileRepository : IFileRepository
+    internal class AddFileRepository : IAddFileRepository
     {
-        private readonly IFilenameGenerator _filenameGenerator;
         private readonly IAppSettingService _appSettingService;
-        public FileRepository()
+        private readonly IFilenameGenerator _filenameGenerator;
+
+        public AddFileRepository()
         {
             _filenameGenerator = new FilenameGenerator();
             _appSettingService = new AppSettingService();
         }
 
-        public void LoadMetadata(List<KeyValuePair<string, List<IMetadataItem>>> yearItems)
-        {
-            foreach (var yearItem in yearItems)
-            {
-                var metadataFiles = Directory.GetFiles(yearItem.Key, "*_Metadata.xml");
-
-                foreach (var metadataFile in metadataFiles)
-                {
-                    var xmlSerializer = new XmlSerializer(typeof(MetadataItem));
-                    var streamReader = new StreamReader(metadataFile);
-                    var metadataItem = (MetadataItem) xmlSerializer.Deserialize(streamReader);
-                    /*
-                                        var ocrFile = metadataFile.Replace("Metadata.xml", "Ocr.txt");
-
-                                         if (File.Exists(ocrFile))
-                                           {
-                                               metadataItem.OcrData = File.ReadAllText(ocrFile);
-                                           } */
-
-                    yearItem.Value.Add(metadataItem);
-                }
-            }
-        }
-
-        /*  private List<KeyValuePair<string, List<MetadataItem>>> GetYearItems()
-         {
-             var yearItems = new List<KeyValuePair<string, List<MetadataItem>>>();
-
-         }*/
-
         public void AddFile(IMetadataItem metadataItem, bool deleteFile)
         {
-            var repositoryDir = _appSettingService.GetRepositoryDir();// @"C:\Temp\DMS1";
-            // _appSettingsService.GetRepositoryDir();
+            var repositoryDir = _appSettingService.GetRepositoryDir();
             var year = metadataItem.ValutaDatum.Year;
             var documentId = Guid.NewGuid();
             var extension = Path.GetExtension(metadataItem.OrginalPath);
@@ -67,14 +36,10 @@ namespace ZbW.Testing.Dms.Client.Services
             metadataItem.DocumentId = documentId;
             metadataItem.ValutaYear = year.ToString();
 
-            var xmlSerializer = new XmlSerializer(typeof(MetadataItem));
-
             if (!Directory.Exists(targetDir)) Directory.CreateDirectory(targetDir);
 
-            var streamWriter = new StreamWriter(Path.Combine(targetDir, metadataFileName));
-            xmlSerializer.Serialize(streamWriter, metadataItem);
-            streamWriter.Flush();
-            streamWriter.Close();
+            WriteXml(targetDir, metadataFileName, metadataItem);
+
 
             //move file
             File.Copy(metadataItem.OrginalPath, Path.Combine(targetDir, contentFileName));
@@ -96,6 +61,15 @@ namespace ZbW.Testing.Dms.Client.Services
                     MessageBox.Show(e.Message);
                 }
             }
+        }
+
+        public virtual void WriteXml(string targetDir, string metadataFileName, IMetadataItem metadataItem)
+        {
+            var xmlSerializer = new XmlSerializer(typeof(MetadataItem));
+            var streamWriter = new StreamWriter(Path.Combine(targetDir, metadataFileName));
+            xmlSerializer.Serialize(streamWriter, metadataItem);
+            streamWriter.Flush();
+            streamWriter.Close();
         }
     }
 }
