@@ -1,10 +1,11 @@
-﻿using System.Windows;
-using ZbW.Testing.Dms.Client.ViewModels;
-
-namespace ZbW.Testing.Dms.Client.Views
+﻿namespace ZbW.Testing.Dms.Client.Views
 {
+    using System.Windows;
+
+    using ZbW.Testing.Dms.Client.ViewModels;
+
     /// <summary>
-    ///     Interaction logic for LoginView.xaml
+    /// Interaction logic for LoginView.xaml
     /// </summary>
     public partial class LoginView : Window
     {

@@ -3,6 +3,7 @@ using FakeItEasy;
 using NUnit.Framework;
 using ZbW.Testing.Dms.Client.IntegrationTests._TestResources;
 using ZbW.Testing.Dms.Client.Model;
+using ZbW.Testing.Dms.Client.Services;
 using ZbW.Testing.Dms.Client.Services.Interface;
 
 namespace ZbW.Testing.Dms.Client.IntegrationTests
@@ -30,13 +31,13 @@ namespace ZbW.Testing.Dms.Client.IntegrationTests
             A.CallTo(() => filenameGeneratorStub.GetContentFilename(metadataItemStub.DocumentId, ".pdf")).Returns(metadataItemStub.DocumentId + "_content");
             A.CallTo(() => filenameGeneratorStub.GetMetadataFilename(metadataItemStub.DocumentId)).Returns(metadataItemStub.DocumentId + "_metadata");
 
-            var xmlServiceStub = A.Fake<IXmlService>();
-            A.CallTo(() => xmlServiceStub.MetadataItemToXml(metadataItemStub, "targetPath2018")).DoesNothing();
+            var xmlServiceStub = A.Fake<IAddFileRepository>();
+           
 
-            var sut = new FileSystemService(xmlServiceStub, filenameGeneratorServiceStub, directoryServiceStub, guidGeneratorStub);
+            var sut = new AddFileRepository();
 
             //act
-            sut.AddFile(metadataItemStub, false, @"C:\Temp\sourcePath\test.pdf");
+            sut.AddFile(metadataItemStub, false);
 
             //assert
             A.CallTo(() => guidGeneratorStub.GetNewGuid()).MustHaveHappened();
@@ -52,13 +53,13 @@ namespace ZbW.Testing.Dms.Client.IntegrationTests
             var deleteFileIsFalse = false;
 
             var addFileRepositoryStub = A.Fake<IAddFileRepository>();
-            A.CallTo(() => addFileRepositoryStub.AddFile(metadataItemMock, deleteFileIsTrue)).MustHaveHappened();
+            A.CallTo(() => addFileRepositoryStub.AddFile(metadataItemMock, deleteFileIsFalse)).MustHaveHappened();
 
             //Act
-            addFileRepositoryStub.AddFile(metadataItemMock, deleteFileIsTrue);
+            addFileRepositoryStub.AddFile(metadataItemMock, deleteFileIsFalse);
 
             //Assert
-            A.CallTo(() => addFileRepositoryStub.AddFile(metadataItemMock, deleteFileIsTrue)).MustHaveHappened();
+            A.CallTo(() => addFileRepositoryStub.AddFile(metadataItemMock, deleteFileIsFalse)).MustHaveHappened();
         }
     }
 }

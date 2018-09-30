@@ -8,7 +8,6 @@ namespace ZbW.Testing.Dms.Client.ViewModels
     internal class LoginViewModel : BindableBase
     {
         private readonly LoginView _loginView;
-
         private string _benutzername;
 
         public LoginViewModel(LoginView loginView)
